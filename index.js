@@ -161,7 +161,7 @@ app.post("/updatedata", (req, res) => {
 
             if (!row) {
                 db.close();
-                return res.status(404).json({ error: 'RFID not found' });
+                return res.json({ error: 'RFID not found' });
             }
 
             console.log(row.IsPresent);
@@ -181,7 +181,7 @@ app.post("/updatedata", (req, res) => {
 
                 if (!row) {
                     db.close();
-                    return res.status(404).json({ error: 'RFID not found' });
+                    return res.json({ error: 'RFID not found' });
                 }
 
                 const userid = row.UserId;
