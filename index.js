@@ -301,6 +301,22 @@ app.get("/resettoday", (req, res) => {
     });
 });
 
+app.post("/presentparti",(req,res)=>{
+    const db = new sqlite3.Database('Data.db',(err)=>{
+        if (err){
+            console.error('Error opening database:', err.message);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }else{
+            const query = `SELECT IsPresent FROM userrecord WHERE RFID ="${req.body.RFID}"`
+            db.get(query,(err,row)=>{
+                db.close()
+                return res.json({result:row.IsPresent})
+            })
+        }
+    })
+})
+
+
 app.post('/test',(req,res)=>{
     console.log(req.header)
 })
