@@ -17,7 +17,7 @@ app.post('/api', (req, res) => {
     res.json({ message: 'Received POST request' });
 });
 
-app.get("/fetchdata", (req, res) => {
+app.get("/api/fetchdata", (req, res) => {
     let FirstName = [];
     let Total = [];
     const db = new sqlite3.Database('Data.db', (err) => {
@@ -48,7 +48,7 @@ app.get("/fetchdata", (req, res) => {
         }
     });
 });
-app.get("/fetchdataabsent", (req, res) => {
+app.get("/api/fetchdataabsent", (req, res) => {
     let FirstName = [];
     let TotalAbsent = [];
     const db = new sqlite3.Database('Data.db', (err) => {
@@ -80,7 +80,7 @@ app.get("/fetchdataabsent", (req, res) => {
     });
 });
 
-app.get("/fetchdatapresenint", (req, res) => {
+app.get("/api/fetchdatapresenint", (req, res) => {
     let counts = [];
     let intervals = [];
     const db = new sqlite3.Database('Data.db', (err) => {
@@ -118,7 +118,7 @@ app.get("/fetchdatapresenint", (req, res) => {
     });
 });
 
-app.get("/fetchdatatotalparti", (req, res) => {
+app.get("/api/fetchdatatotalparti", (req, res) => {
     const db = new sqlite3.Database('Data.db', (err) => {
         if (err) {
             console.error('Error opening database:', err.message);
@@ -138,7 +138,7 @@ app.get("/fetchdatatotalparti", (req, res) => {
     })
 })
 
-app.post("/updatedata", (req, res) => {
+app.post("/api/updatedata", (req, res) => {
     const db = new sqlite3.Database('Data.db', (err) => {
         if (err) {
             console.error('Error opening database:', err.message);
@@ -212,7 +212,7 @@ app.post("/updatedata", (req, res) => {
     });
 });
 
-app.post("/getname", (req, res) => {
+app.post("/api/getname", (req, res) => {
     const db = new sqlite3.Database('Data.db', (err) => {
         if (err) {
             console.error('Error opening database:', err.message);
@@ -234,7 +234,7 @@ app.post("/getname", (req, res) => {
 
 })
 
-app.get("/gettotalparticipants", (req, res) => {
+app.get("/api/gettotalparticipants", (req, res) => {
     const db = new sqlite3.Database('Data.db', (err) => {
         if (err) {
             console.error('Error opening database:', err.message);
@@ -248,7 +248,7 @@ app.get("/gettotalparticipants", (req, res) => {
     })
 })
 
-app.get("/resettoday", (req, res) => {
+app.get("/api/resettoday", (req, res) => {
     const db = new sqlite3.Database('Data.db', (err) => {
         if (err) {
             console.error('Error opening database:', err.message);
@@ -301,7 +301,7 @@ app.get("/resettoday", (req, res) => {
     });
 });
 
-app.post("/presentparti",(req,res)=>{
+app.post("/api/presentparti",(req,res)=>{
     const db = new sqlite3.Database('Data.db',(err)=>{
         if (err){
             console.error('Error opening database:', err.message);
