@@ -316,6 +316,21 @@ app.post("/api/presentparti",(req,res)=>{
     })
 })
 
+app.get('/api/deletelate',(req,res)=>{
+    const db = new sqlite3.Database('Data.db',(err)=>{
+        const query = `DELETE FROM Present`
+        db.run(query)
+        return res.json({result:"Delete Success"})
+    })
+})
+
+app.get('/api/deleteabsent',(req,res)=>{
+    const db = new sqlite3.Database('Data.db',(err)=>{
+        const query = `DELETE FROM Absent`
+        db.run(query)
+        return res.json({result:"Delete Success"})
+    })
+})
 
 app.post('/test',(req,res)=>{
     console.log(req.header)
