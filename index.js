@@ -131,13 +131,7 @@ app.get("/fetchdatatotalparti", (req, res) => {
                     console.error('Error querying database:', err);
                     res.status(500).json({ error: 'Internal Server Error' });
                 } else {
-                    // Construct JSON response
-                    const response = {
-                        date: date,
-                        count: row.count
-                    };
-                    console.log(response)
-                    res.json(response);
+                    res.json({result:row.count});
                 }
             });
         }
@@ -161,14 +155,14 @@ app.post("/updatedata", (req, res) => {
 
             if (!row) {
                 db.close();
-                return res.json({ error: 'RFID not found' });
+                return res.json({ result: 'RFID not found' });
             }
 
             console.log(row.IsPresent);
 
             if (row.IsPresent == 1) {
                 db.close();
-                return res.json({ "respond": "Present" });
+                return res.json({ result: "Present" });
             }
 
             const getuidquery = `SELECT UserId FROM userrecord WHERE RFID ="${req.body.RFID}"`;
@@ -181,7 +175,7 @@ app.post("/updatedata", (req, res) => {
 
                 if (!row) {
                     db.close();
-                    return res.json({ error: 'RFID not found' });
+                    return res.json({ result: 'RFID not found' });
                 }
 
                 const userid = row.UserId;
@@ -210,7 +204,7 @@ app.post("/updatedata", (req, res) => {
                         }
 
                         db.close();
-                        return res.json({ "result": "SUCCESS" });
+                        return res.json({ result: "SUCCESS" });
                     });
                 });
             });
@@ -229,11 +223,11 @@ app.post("/getname", (req, res) => {
             console.log(row)
             if (!row) {
                 db.close()
-                return res.json({ "result": "Unknown" })
+                return res.json({ result: "Unknown" })
             }
             else {
                 db.close()
-                return res.json(row)
+                return res.json({ result: row.FirstName + " " + row.LastName})
             }
         })
     })
@@ -249,7 +243,7 @@ app.get("/gettotalparticipants", (req, res) => {
         const query = `SELECT COUNT(IsPresent) AS count FROM userrecord `
         db.get(query, (err, row) => {
             db.close()
-            return res.json(row)
+            return res.json({result: row.count})
         })
     })
 })
